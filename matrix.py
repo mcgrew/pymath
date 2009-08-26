@@ -536,7 +536,7 @@ class matrix( object ):
             column : list
                 The column to be inserted
         """
-        self.insertRow( self._width, *column )
+        self.insertColumn( self._width, *column )
 
     def addRow( self, *row ):
         """
