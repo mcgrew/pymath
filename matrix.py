@@ -695,6 +695,14 @@ class matrix( object ):
             raise TypeError( "Inapproproate argument type for hadamard product" )
         if not( self.size == value.size ):
             raise ValueError( "Matrices must be of the same size for hadamard product" )
+        returnvalue = matrix( )
+        for i in xrange( self._height ):
+            newRow = list( )
+            for j in xrange( self._width ):
+                newRow.append( self[ i ][ j ] * value[ i ][ j ] )
+            returnvalue.addRow( *newRow )
+        return returnvalue
+                
 
     def insertColumn( self, index, *column ):
         """
@@ -835,7 +843,18 @@ class matrix( object ):
         :rtype: matrix
         :returns: The Kronecker Product of the two matrices
         """
-        pass
+        if not ( type( self ) == type( value ) ):
+            raise TypeError( "Inapproproate argument type for hadamard product" )
+        returnvalue = matrix( )
+        for i in xrange( self._height ):
+            for j in xrange( value._height ):
+                newRow = list( )
+                for k in xrange( self._width ):
+                    for l in range( value._width ):
+                        newRow.append( self[ i ][ k ] * value[ j ][ l ] )
+                returnvalue.addRow( *newRow )
+        return returnvalue
+                        
 
     def minor( self, i, j ):
         """
