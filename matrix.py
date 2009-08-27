@@ -647,6 +647,19 @@ class matrix( object ):
     # An alias for determinant
     det = determinant
             
+    def frobenius( self, value ):
+        """
+        Returns the Frobenius inner product of this matrix and the passed-in matrix
+
+        :Paramters:
+            value : matrix
+            The value of the matrix to combine this matrix with
+
+        :rtype: matrix
+        :returns: The Frobenius Inner Product of the two matrices
+        """
+        return sum( self.hadamard( value ) )
+
     def getColumn( self, column ):
         """
         Get a column from this matrix
