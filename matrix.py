@@ -21,7 +21,7 @@ import types
 from sys import argv
 import os
 
-VERSION = "0.2-rc2"
+VERSION = "0.3-pre"
 
 MATRIX_VALID_TYPES = ( types.IntType, types.FloatType, types.LongType, types.ComplexType )
 MATRIX_VALID_TYPENAMES = ( 'int', 'float', 'long', 'complex' )

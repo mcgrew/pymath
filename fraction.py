@@ -21,7 +21,7 @@ from __future__ import division # forward compatibility. I don't like this chang
 import types
 from sys import maxint as MAXINT
 
-VERSION = "0.1-rc3"
+VERSION = "0.1"
 
 FRACTION_VALID_TYPES = ( types.IntType, types.LongType, types.ComplexType, types.FloatType )
 FRACTION_FLOAT_ACCURACY = 8 # how many decimal places to round floats to. This may be overidden to increase/decrease accuracy, but don't make it too large.
