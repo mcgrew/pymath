@@ -557,7 +557,7 @@ class matrix( object ):
         :rtype: matrix
         :returns: The adjoint of this matrix.
         """
-        return self.cofactormatrix( ).transpose( )
+        return self.cofactorMatrix( ).transpose( )
 
     # Aliases for adjoint    
     adj = adjugate = adjoint
@@ -581,10 +581,10 @@ class matrix( object ):
         :returns: The cofactor of the item at row, column.
         """
         if not self.isSquare( ):
-            raiseValueError( "Cofactor is not defined for a non-square matrix" )
+            raise ValueError( "Cofactor is not defined for a non-square matrix" )
         return ( ( -1 ) ** ( row + column ) ) * self.minor( row, column )
                 
-    def cofactormatrix( self ):
+    def cofactorMatrix( self ):
         """
         The cofactor matrix. Only for square matrices.
 
@@ -733,7 +733,7 @@ class matrix( object ):
             column = column[ 0 ]
         if self._height:
             if not ( len( column ) == self._height ):
-                raise ValueError( 'Improper length for new column: %d, should be %d' % (len( column ), self._height ) )
+                raise ValueError( 'Improper length for new column: %d, should be %d' % ( len( column ), self._height ) )
         else:
             self._height = len( column )
             for i in range( self._height ):
@@ -765,7 +765,7 @@ class matrix( object ):
             row = row[ 0 ]
         if self._width:
             if not ( len( row ) == self._width ):
-                raise ValueError( 'Improper length for new row: %d, should be %d' % (len( row ), self._width ) )
+                raise ValueError( 'Improper length for new row: %d, should be %d' % ( len( row ), self._width ) )
         else:
             self._width = len( row )
         self._height += 1
@@ -793,7 +793,8 @@ class matrix( object ):
             raise ValueError( "Inverse is not defined for a non-square matrix" )
         if not self.determinant( ):
             raise ValueError( 'This matrix is not invertible' )
-        return ( self.adjoint( ).__div__(  self.determinant( ) ) ) # future division breaks the "/" operator, so we have to call the function directly.
+        # future division breaks the "/" operator, so we have to call the function directly.			
+        return ( self.adjoint( ).__div__(  self.determinant( ) ) ) 
 
     def isInvertible( self ):
         """
@@ -857,7 +858,7 @@ class matrix( object ):
         :returns: The Kronecker Product of the two matrices
         """
         if not ( type( self ) == type( value ) ):
-            raise TypeError( "Inapproproate argument type for hadamard product" )
+            raise TypeError( "Inappropriate argument type for kronecker product" )
         returnvalue = matrix( )
         for i in xrange( self._height ):
             for j in xrange( value._height ):
@@ -877,9 +878,9 @@ class matrix( object ):
         :returns: The minor of the item at column i, row j
         """
         if not self.isSquare( ):
-            raise ValueError( "Minor not defined for non-square matrix" )
+            raise ValueError( "Minor is not defined for non-square matrix" )
         if ( self._height == 1 and self._width == 1):
-            raise ValueError( "not defined for 1x1 matrix" )
+            raise ValueError( "Minor is not defined for 1x1 matrix" )
         m = matrix( self )
         m.deleteRow( i )
         m.deleteColumn( j )
@@ -981,7 +982,7 @@ def identMatrix( size ):
 
     :Parameters:
         size : int
-            The size of the square matrix to return.
+            The width and height of the matrix to return.
             
     :rtype: matrix
     :returns: An identity matrix of the specified size.
